@@ -1,6 +1,6 @@
 <template>
   <view>
-    这是分类区
+    
   </view>
 </template>
 

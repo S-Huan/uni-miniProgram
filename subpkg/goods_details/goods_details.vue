@@ -1,6 +1,10 @@
 <template>
   <view>
-    这是分类区
+    <view>
+      这是商品详情页
+      <image></image>
+      <span></span>
+    </view>
   </view>
 </template>
 
