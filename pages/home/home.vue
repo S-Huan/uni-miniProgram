@@ -1,11 +1,15 @@
 <template>
   <view >
+    <!-- 使用自定义的搜索组件 -->
+    <view class="search-box">
+   <huan-search @click="gotoSearch"></huan-search>
+    </view>
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
       <swiper-item v-for="item in swriperList" :key="item.goods_id">
         <navigator class="swiper-item" :url="'/subpkg/goods_details/goods_details?goods_id=' + item.goods_id">
               <image :src="item.image_src"></image>
         </navigator>
-      </swiper-item>
+      </swiper-item> 
     </swiper>
     
   <!-- 分类导航区域 -->
@@ -69,7 +73,7 @@
       // 3. 获取楼层列表数据的方法
     async getFloorList() {
       const { data: res } = await uni.$http.get('api/public/v1/home/floordata')
-      console.log(res)
+     
       if (res.meta.status !== 200) return uni.$showMsg()
       res.message.forEach(floor => {
         floor.product_list.forEach(prod => {
@@ -87,6 +91,11 @@
             url: '/pages/cate/cate'
           })
         }
+      },
+      gotoSearch() {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
+        })
       }
     },       
 
@@ -132,5 +141,13 @@ swiper {
 .floor-img-box {
   display: flex;
   padding-left: 10rpx;
+}
+.search-box {
+  // 设置定位效果为“吸顶”
+  position: sticky;
+  // 吸顶的“位置”
+  top: 0;
+  // 提高层级，防止被轮播图覆盖
+  z-index: 999;
 }
 </style>

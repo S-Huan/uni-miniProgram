@@ -1,5 +1,6 @@
 <template>
    <view>
+      <huan-search @click="gotoSearch"></huan-search>
      <view class="scroll-view-container">
        <!-- 左侧的滚动视图区域 -->
        <scroll-view class="left-scroll-view" scroll-y :style="{height: wh + 'px'}">
@@ -45,8 +46,8 @@
     onLoad() {
           // 获取当前系统的信息
             const sysInfo = uni.getSystemInfoSync()
-            // 为 wh 窗口可用高度动态赋值
-            this.wh = sysInfo.windowHeight
+             // 可用高度 = 屏幕高度 - navigationBar高度 - tabBar高度 - 自定义的search组件高度
+              this.wh = sysInfo.windowHeight - 50
              this.getCateList()
             
     },
@@ -73,7 +74,13 @@
             this.cateLevel2 = this.cateList[i].children
              // 让 scrollTop 的值在 0 与 1 之间切换
               this.scrollTop = this.scrollTop === 0 ? 1 : 0
-          }
+          },
+             // 跳转到分包中的搜索页面
+             gotoSearch() {
+               uni.navigateTo({
+                 url: '/subpkg/search/search'
+               })
+             }
     }
   }
 </script>
