@@ -44,13 +44,14 @@
            
       };
     },
-    computed: {
+    computed: { 
       historys() {
-        const set = new Set(this.historyList)
-          this.historyList = Array.from(set)
+       const arr = [...this.historyList].reverse()
+        const set = new Set(arr)
+         
         // 注意：由于数组是引用类型，所以不要直接基于原数组调用 reverse 方法，以免修改原数组中元素的顺序
         // 而是应该新建一个内存无关的数组，再进行 reverse 反转
-        return [...this.historyList].reverse()
+        return Array.from(set)
       }
     },
     methods: {
